@@ -2,45 +2,68 @@ import { gql } from '@apollo/client'
 import client from './apolloClient'
 
 export async function GET_GAMES() {
-  const data = await client.query({
-    query: gql`
-      query GetGames {
-        games {
-          id
-          title
-          platform
+  const {data} = await fetch('http://localhost:4000/', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `#graphql
+        query GetGames {
+          games { 
+            id
+            title
+            platform
+          }
         }
-      }
-    `
-  })
-  return data.data;
+      `,
+    }),
+    next: { revalidate: 10 },
+  }).then((data) => data.json());
+  console.log("Sending ", data)
+  return data;
 }
+
 export async function GET_REVIEWS() {
-  const data = await client.query({
-    query: gql`
-      query GetReviews {
-        reviews {
-        game {
-          title
-        }
-        id
-        author {
+  const {data} = await fetch('http://localhost:4000/', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `#graphql
+        query GetReviews {
+          reviews {
+          game {
+            title
+          }
           id
-          name
-          verified
+          author {
+            id
+            name
+            verified
+          }
+          content
+          rating
+          }
         }
-        content
-        rating
-        }
-      }
-    `
-  })  
-  return data.data;
+      `,
+    }),
+    next: { revalidate: 10 },
+  }).then((data) => data.json());
+  console.log("Sending ", data)
+  return data;
 }
+
 export async function GET_REVIEWS_BY_GAME(id) {
-  const data = await client.query({
-    query: gql`
-      query Game($gameId: ID!) {
+  const {data} = await fetch('http://localhost:4000/', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `#graphql
+        query Game($gameId: ID!) {
         game(id: $gameId) {
           id
           title
@@ -56,8 +79,12 @@ export async function GET_REVIEWS_BY_GAME(id) {
           }
         }
       }
-    `,
-    variables: {gameId: id},
-  })
-  return data.data;
+      `,
+      variables: {gameId: id},
+    }),
+    next: { revalidate: 10 },
+  }).then((data) => data.json());
+  console.log("Sending ", data)
+  return data;
 }
+

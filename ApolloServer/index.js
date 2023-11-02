@@ -60,7 +60,11 @@ const resolvers = {
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  cors: {
+    origin: 'http://localhost:3000', // Specify the origin (e.g., your Next.js app)
+    credentials: true, // Enable credentials (e.g., cookies, authorization headers)
+  },
 })
 
 const { url } = await startStandaloneServer(server, {
