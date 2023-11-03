@@ -5,8 +5,8 @@ function AddGame() {
   const handleAddGame = async () => {
     try {
       const newGame = {
-        title: "Baldur's Gate 3",
-        platform: ["PS5","Xbox","PC"],
+        title: "Path of Exile 2",
+        platform: ["PC", "PS5"],
       }
       const data = await ADD_GAME(newGame);
       console.log("New game added", data.addGame);
@@ -16,7 +16,7 @@ function AddGame() {
   }
   return (
     <div>
-      <button onClick={handleAddGame}>Add New Game</button>
+      <button onClick={handleAddGame} className='bg-black font-bold text-3xl border-2 rounded-r-sm px-5 py-2 border-black text-neutral-100'>Add New Game</button>
     </div>
   );
 }

@@ -18,7 +18,7 @@ export default function Reviews(props) {
       <h1 className='font-bold text-3xl my-3'>{props.game.title}</h1>
       <ul className='flex flex-col'>
         {props.game.reviews.map((review) => (
-          <li key={review.id} className='flex flex-col gap-4 px-5 pt-3 pb-10 mb-5 bg-neutral-200 rounded-md'>
+          <li key={review.id} className='flex flex-col gap-4 px-5 pt-3 pb-10 mb-5 bg-neutral-100 border-2 border-black rounded-sm '>
             <div className='flex gap-3 items-center'>
               <div className={`flex justify-center items-center w-16 h-16 rounded-full ${getReviewType(review.rating)}`}>
                 <span className='font-bold text-4xl'>{review.rating}</span>

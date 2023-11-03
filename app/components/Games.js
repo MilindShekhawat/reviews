@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation"
 import Image from "next/image";
 import brief from '../img/briefcase.png'
+import AddGame from "./AddGame";
 
 function GameList(props) {
   console.log("Queried Data", props.games);
@@ -14,8 +15,11 @@ function GameList(props) {
 
   return (
     <div className='flex flex-col'>
-      <h1 className='font-bold text-3xl my-3'>Games</h1>
-      <ul className='flex flex-wrap gap-3'>
+      <div className="flex items-center">
+        <h1 className='font-bold text-3xl border-2 rounded-l-sm px-5 py-2 border-black'>Games</h1>
+        <AddGame />
+      </div>
+      <ul className='flex flex-wrap gap-3 my-5'>
         {props.games.map((game) => (
           <li key={game.id} onClick={() => handleClick(game.id, game.title)} 
           className='relative w-[256px] aspect-card'>
